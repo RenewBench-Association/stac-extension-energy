@@ -2,62 +2,58 @@
   "stac_version": "1.0.0",
   "stac_extensions": [
     "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/template/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/energy/v1.0.0/schema.json"
   ],
   "type": "Collection",
-  "id": "collection",
-  "title": "A title",
-  "description": "A description",
+  "id": "north-sea-wind-park-alpha",
+  "title": "Offshore Wind Park North Sea Alpha",
+  "description": "Generation time series for individual wind turbines at the North Sea Alpha offshore wind park.",
   "license": "Apache-2.0",
   "extent": {
     "spatial": {
       "bbox": [
         [
-          172.9,
-          1.3,
-          173,
-          1.4
+          8.5,
+          53.1,
+          8.6,
+          53.2
         ]
       ]
     },
     "temporal": {
       "interval": [
         [
-          "2015-06-23T00:00:00Z",
+          "2024-01-01T00:00:00Z",
           null
         ]
       ]
     }
   },
-  "template:new_field": "test",
-  "template:xyz": {
-    "x": 1,
-    "y": 2,
-    "z": 3
+  "summaries": {
+    "energy:entity_type": ["unit"],
+    "energy:fuel_type": ["wind"],
+    "energy:fuel_subtype": ["offshore"],
+    "energy:status": ["active", "inactive"],
+    "energy:measurement_type": ["net_generation", "gross_generation"],
+    "energy:generation_capacity": {
+      "minimum": 3.0,
+      "maximum": 8.0
+    }
   },
-  "template:another_one": [
-    1,
-    2,
-    3
-  ],
   "assets": {
-    "example": {
-      "href": "https://example.com/examples/file.xyz",
-      "template:new_field": "test"
+    "overview": {
+      "href": "https://example.com/examples/north-sea-wind-park-alpha-overview.csv",
+      "type": "text/csv",
+      "title": "Collection overview",
+      "roles": ["overview"]
     }
   },
   "item_assets": {
     "data": {
-      "roles": [
-        "data"
-      ],
-      "template:new_field": "test"
-    }
-  },
-  "summaries": {
-    "datetime": {
-      "minimum": "2015-06-23T00:00:00Z",
-      "maximum": "2019-07-10T13:44:56Z"
+      "type": "text/csv",
+      "title": "Generation time series",
+      "roles": ["data"],
+      "energy:measurement_type": "net_generation"
     }
   },
   "links": [
