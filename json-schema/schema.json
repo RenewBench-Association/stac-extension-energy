@@ -434,7 +434,7 @@
               }
             }
           },
-          "then": {
+          "else": {
             "not": {
               "anyOf": [
                 { "required": ["energy:facility_name"] },
