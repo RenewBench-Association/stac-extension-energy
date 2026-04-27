@@ -329,7 +329,9 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "minItems": 2,
+          "uniqueItems": true
         },
         "energy:hybrid_fuel_ratio": {
           "title": "Hybrid Fuel Ratio",
@@ -337,7 +339,8 @@
           "type": "array",
           "items": {
             "type": "number"
-          }
+          },
+          "minItems": 2
         },
         "energy:generation_capacity": {
           "title": "Generation Capacity",
@@ -378,6 +381,25 @@
           },
           "then": {
             "required": ["energy:hybrid_fuel_types"]
+          }
+        },
+        {
+          "$comment": "energy:hybrid_fuel_types and energy:hybrid_fuel_ratio are only permitted when energy:fuel_type is 'hybrid'.",
+          "if": {
+            "required": ["energy:fuel_type"],
+            "properties": {
+              "energy:fuel_type": {
+                "const": "hybrid"
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                { "required": ["energy:hybrid_fuel_types"] },
+                { "required": ["energy:hybrid_fuel_ratio"] }
+              ]
+            }
           }
         },
         {
