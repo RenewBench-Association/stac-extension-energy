@@ -1,0 +1,47 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/energy/v0.1.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "energy-entity-003",
+  "bbox": [
+    9.5,
+    54.1,
+    9.6,
+    54.2
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      9.55,
+      54.15
+    ]
+  },
+  "properties": {
+    "datetime": "2024-01-01T00:00:00Z",
+    "energy:entity_name": "Hybrid-Facility-001",
+    "energy:entity_type": "facility",
+    "energy:operator": "Example Hybrid GmbH",
+    "energy:fuel_type": "hybrid",
+    "energy:hybrid_fuel_types": ["gas", "solar"],
+    "energy:hybrid_fuel_ratios": [70, 30],
+    "energy:generation_capacity": 200.0,
+    "energy:status": "decommissioned",
+    "energy:measurement_type": "gross_output"
+  },
+  "links": [
+    {
+      "href": "https://example.com/examples/item-facility-hybrid.json",
+      "rel": "self"
+    }
+  ],
+  "assets": {
+    "data": {
+      "href": "https://example.com/examples/hybrid-facility-001.csv",
+      "type": "text/csv",
+      "title": "Generation time series",
+      "roles": ["data"]
+    }
+  }
+}

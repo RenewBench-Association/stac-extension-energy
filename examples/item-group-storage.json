@@ -1,0 +1,51 @@
+{
+  "stac_version": "1.0.0",
+  "stac_extensions": [
+    "https://stac-extensions.github.io/energy/v0.1.0/schema.json"
+  ],
+  "type": "Feature",
+  "id": "energy-entity-002",
+  "bbox": [
+    8.8,
+    50.1,
+    8.9,
+    50.2
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      8.85,
+      50.15
+    ]
+  },
+  "properties": {
+    "datetime": "2024-01-01T00:00:00Z",
+    "energy:entity_name": "Battery-Block-001",
+    "energy:entity_type": "group",
+    "energy:facility_name": "Battery-Park-Example",
+    "energy:operator": "Example Battery GmbH",
+    "energy:entity_osm_id": "way/000000022",
+    "energy:facility_osm_id": "relation/000000222",
+    "energy:entity_ids": {
+      "example_battery_gmbh_id": "CUSTOM_BATTERY_001_ID"
+    },
+    "energy:fuel_type": "storage",
+    "energy:storage_power": 15.0,
+    "energy:storage_capacity": 30.0,
+    "energy:measurement_type": "net_output"
+  },
+  "links": [
+    {
+      "href": "https://example.com/examples/item-group-storage.json",
+      "rel": "self"
+    }
+  ],
+  "assets": {
+    "data": {
+      "href": "https://example.com/examples/battery-block-001.csv",
+      "type": "text/csv",
+      "title": "Storage time series",
+      "roles": ["data"]
+    }
+  }
+}

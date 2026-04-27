@@ -12,8 +12,18 @@ It specifies energy related metadata, in particular that which is used to descri
 generation and storage data.
 
 - Examples:
-  - [Item example](examples/item.json): Shows the basic usage of the extension in a STAC Item
-  - [Collection example](examples/collection.json): Shows the basic usage of the extension in a STAC Collection
+  - Items:
+    - [Wind turbine](examples/item-unit-wind.json) (`entity_type=unit`, `fuel_type=wind`):
+      
+      Shows a single-fuel unit-level entity with group and facility references.
+    - [Battery block](examples/item-group-storage.json) (`entity_type=group`, `fuel_type=storage`): 
+
+      Shows a storage block entity with associated power and capacity.
+    - [Hybrid facility](examples/item-facility-hybrid.json) (`entity_type=facility`, `fuel_type=hybrid`): 
+
+      Shows a hybrid generation facility entity with two fuel types and ratios.
+  - Collections:
+    - [Collection](examples/collection.json): Shows the usage of the extension in a STAC Collection
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
@@ -24,7 +34,7 @@ The fields in the table below can be used in these parts of STAC documents:
 - [ ] Catalogs
 - [x] Collections
 - [x] Item Properties (incl. Summaries in Collections)
-- [x] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
+- [ ] Assets (for both Collections and Items, incl. Item Asset Definitions in Collections)
 - [ ] Links
 
 | Field Name                   | Type      | Description                                                                                                                                         |
@@ -73,15 +83,21 @@ Examples for suitable definitions include:
 
 #### `energy:entity_osm_id`
 
-The `energy:entity_osm_id` field defines the OSM ID that can be associated with the energy 
-entity. Following OSM convention, it should be formatted as `<type>/<id>` where `type` is 
-one of `["node", "way", "relation"]`.
+The `energy:entity_osm_id` field defines the ID that is associated with the energy 
+entity on OSM. Following OSM conventions, it should be formatted as `<type>/<id>` where 
+`<type>` is one of `node`, `way`, or `relation`. The specific type definition depends on how the 
+corresponding entity is represented in OSM. For reference, some examples include:
+
+- a wind turbine listed as [a node](https://www.openstreetmap.org/node/3347682357#map=14/53.45696/-3.30075),
+- wind farms defined as [a node](https://www.openstreetmap.org/node/310852906),
+  [a way](https://www.openstreetmap.org/way/327949356#map=12/53.4824/-3.2598), or
+  [a relation](https://www.openstreetmap.org/relation/6949277#map=12/55.4521/-3.5763).
 
 > [!TIP]
 >
 > Depending on what the `entity_type` itself is, `energy:group_osm_id`, and 
-> `energy:facility:osm_id` can similarly be populated with OSM IDs, which must follow the 
-> same definition specification.
+> `energy:facility:osm_id` can similarly be populated with OSM IDs. These must follow the 
+> same convention.
 
 #### energy:entity_ids
 
