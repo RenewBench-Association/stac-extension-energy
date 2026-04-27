@@ -383,38 +383,38 @@
         {
           "$comment": "energy:group_name and energy:group_osm_id are only permitted when energy:entity_type is 'unit'.",
           "if": {
-            "not": {
-              "required": ["energy:entity_type"],
-              "properties": {
-                "energy:entity_type": {
-                  "const": "unit"
-                }
+            "required": ["energy:entity_type"],
+            "properties": {
+              "energy:entity_type": {
+                "const": "unit"
               }
             }
           },
-          "then": {
-            "properties": {
-              "energy:group_name": false,
-              "energy:group_osm_id": false
+          "else": {
+            "not": {
+              "anyOf": [
+                { "required": ["energy:group_name"] },
+                { "required": ["energy:group_osm_id"] }
+              ]
             }
           }
         },
         {
           "$comment": "energy:facility_name and energy:facility_osm_id are only permitted when energy:entity_type is 'unit' or 'group'.",
           "if": {
-            "not": {
-              "required": ["energy:entity_type"],
-              "properties": {
-                "energy:entity_type": {
-                  "enum": ["unit", "group"]
-                }
+            "required": ["energy:entity_type"],
+            "properties": {
+              "energy:entity_type": {
+                "enum": ["unit", "group"]
               }
             }
           },
           "then": {
-            "properties": {
-              "energy:facility_name": false,
-              "energy:facility_osm_id": false
+            "not": {
+              "anyOf": [
+                { "required": ["energy:facility_name"] },
+                { "required": ["energy:facility_osm_id"] }
+              ]
             }
           }
         }
