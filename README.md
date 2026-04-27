@@ -34,7 +34,7 @@ The fields in the table below can be used in these parts of STAC documents:
 | `energy:group_name`          | string    | Name of the sub-facility group.<br> _Only permitted if `entity_type` is `unit`._                                                                    |
 | `energy:facility_name`       | string    | Name of the overarching facility.<br> _Only permitted if `entity_type` is `unit` or `group`._                                                       |
 | `energy:operator`            | string    | Name of the company that operates the entity.                                                                                                       |
-| `energy:entity_osm_id`       | string    | The OpenStreetMap (OSM) ID associated with the entity.                                                                                              |
+| `energy:entity_osm_id`       | string    | The [OpenStreetMap (OSM)](https://www.openstreetmap.org) ID associated with the entity (s. [entity_osm_id](#energyentity_osm_id)).                  |
 | `energy:group_osm_id`        | string    | The OSM ID of the sub-facility group.<br> _Only permitted if `entity_type` is `unit`._                                                              |
 | `energy:facility_osm_id`     | string    | The OSM ID of the overarching facility.<br> _Only permitted if `entity_type` is `unit` or `group`._                                                 |
 | `energy:entity_ids`          | object    | Dictionary of IDs mapping ID types to values (s. [entity_ids](#energyentity_ids)).                                                                  |
@@ -64,10 +64,24 @@ Examples for suitable definitions include:
 | `region`    | A geographic aggregation of assets.                                     |
 | `unknown`   | The structural level is not specified.                                  |
 
-The `energy:entity_type` value should be set as whatever the **smallest** hierarchical 
-level the data is given for. If more information is available, e.g. 
-`energy:entity_type=unit` but the facility is also known, this can be provided in the 
-additional `energy:facility_name` field.
+> [!IMPORTANT]
+>
+> The `energy:entity_type` value should be set as whatever the **smallest** hierarchical 
+> level the data is given for. If more information is available, e.g. 
+> `energy:entity_type=unit` but the facility is also known, this can be provided in the 
+> additional `energy:facility_name` field.
+
+#### `energy:entity_osm_id`
+
+The `energy:entity_osm_id` field defines the OSM ID that can be associated with the energy 
+entity. Following OSM convention, it should be formatted as `<type>/<id>` where `type` is 
+one of `["node", "way", "relation"]`.
+
+> [!TIP]
+>
+> Depending on what the `entity_type` itself is, `energy:group_osm_id`, and 
+> `energy:facility:osm_id` can similarly be populated with OSM IDs, which must follow the 
+> same definition specification.
 
 #### energy:entity_ids
 

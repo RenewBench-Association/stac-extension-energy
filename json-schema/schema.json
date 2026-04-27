@@ -293,17 +293,20 @@
         "energy:entity_osm_id": {
           "title": "Entity OSM ID",
           "description": "The OpenStreetMap (OSM) ID associated with the entity.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^(node|way|relation)/[0-9]+$"
         },
         "energy:group_osm_id": {
           "title": "Group OSM ID",
           "description": "The OSM ID of the sub-facility group. Only permitted if entity_type is 'unit'.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^(node|way|relation)/[0-9]+$"
         },
         "energy:facility_osm_id": {
           "title": "Facility OSM ID",
           "description": "The OSM ID of the overarching facility. Only permitted if entity_type is 'unit' or 'group'.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^(node|way|relation)/[0-9]+$"
         },
         "energy:entity_ids": {
           "title": "Entity IDs",
