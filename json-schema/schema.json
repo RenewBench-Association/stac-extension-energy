@@ -14,8 +14,7 @@
           "type": "object",
           "required": [
             "type",
-            "properties",
-            "assets"
+            "properties"
           ],
           "properties": {
             "type": {
@@ -36,13 +35,6 @@
                   "$ref": "#/definitions/fields"
                 }
               ]
-            },
-            "assets": {
-              "$comment": "This validates the fields in Item Assets, but does not require them.",
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
             }
           }
         }
@@ -68,7 +60,19 @@
       ],
       "anyOf": [
         {
-          "$comment": "This is the schema for the fields in Collection Summaries. Requires at least one energy summary field.",
+          "$comment": "This is the schema for top-level Collection fields. If given, requires at least one energy field.",
+          "allOf": [
+            {
+              "$comment": "Require fields here for Collections at top level.",
+              "$ref": "#/definitions/require_any_top_level_field"
+            },
+            {
+              "$ref": "#/definitions/top_level_fields"
+            }
+          ]
+        },
+        {
+          "$comment": "This is the schema for the fields in Collection Summaries. If given, requires at least one energy summary field.",
           "required": [
             "summaries"
           ],
@@ -77,62 +81,13 @@
               "type": "object",
               "allOf": [
                 {
+                  "$comment": "Require fields here for Collection summaries.",
                   "$ref": "#/definitions/require_any_summary_field"
                 },
                 {
                   "$ref": "#/definitions/summary_fields"
                 }
               ]
-            }
-          }
-        },
-        {
-          "$comment": "This validates the fields in Collection Assets, but does not require them.",
-          "required": [
-            "assets"
-          ],
-          "properties": {
-            "assets": {
-              "type": "object",
-              "not": {
-                "additionalProperties": {
-                  "not": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/require_any_field"
-                      },
-                      {
-                        "$ref": "#/definitions/fields"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "$comment": "This is the schema for the fields in Item Asset Definitions. It doesn't require any fields.",
-          "required": [
-            "item_assets"
-          ],
-          "properties": {
-            "item_assets": {
-              "type": "object",
-              "not": {
-                "additionalProperties": {
-                  "not": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/require_any_field"
-                      },
-                      {
-                        "$ref": "#/definitions/fields"
-                      }
-                    ]
-                  }
-                }
-              }
             }
           }
         }
@@ -154,28 +109,44 @@
         }
       }
     },
-    "require_any_field": {
-      "$comment": "List all fields here so that we can force the existence of at least one of them in assets and item_assets.",
+    "require_any_top_level_field": {
+      "$comment": "Requires at least one meaningful field to be present in Collection top level.",
       "anyOf": [
-        {"required": ["energy:entity_name"]},
         {"required": ["energy:entity_type"]},
-        {"required": ["energy:group_name"]},
-        {"required": ["energy:facility_name"]},
-        {"required": ["energy:operator"]},
-        {"required": ["energy:entity_osm_id"]},
-        {"required": ["energy:group_osm_id"]},
-        {"required": ["energy:facility_osm_id"]},
-        {"required": ["energy:entity_ids"]},
         {"required": ["energy:fuel_type"]},
         {"required": ["energy:fuel_subtype"]},
-        {"required": ["energy:hybrid_fuel_types"]},
-        {"required": ["energy:hybrid_fuel_ratio"]},
-        {"required": ["energy:generation_capacity"]},
-        {"required": ["energy:storage_power"]},
-        {"required": ["energy:storage_capacity"]},
         {"required": ["energy:status"]},
+        {"required": ["energy:operator"]},
         {"required": ["energy:measurement_type"]}
       ]
+    },
+    "top_level_fields": {
+      "$comment": "Defines the allowed top-level fields for Collections.",
+      "type": "object",
+      "properties": {
+        "energy:entity_type": {
+          "type": "string"
+        },
+        "energy:fuel_type": {
+          "type": "string"
+        },
+        "energy:fuel_subtype": {
+          "type": "string"
+        },
+        "energy:status": {
+          "type": "string"
+        },
+        "energy:operator": {
+          "type": "string"
+        },
+        "energy:measurement_type": {
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^(?!energy:)": {}
+      },
+      "additionalProperties": false
     },
     "require_any_summary_field": {
       "$comment": "Requires at least one meaningful summary field to be present in Collection summaries.",
@@ -200,7 +171,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "uniqueItems": true
         },
         "energy:fuel_type": {
           "title": "Fuel Type Summary",
@@ -208,7 +180,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "uniqueItems": true
         },
         "energy:fuel_subtype": {
           "title": "Fuel Subtype Summary",
@@ -216,7 +189,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "uniqueItems": true
         },
         "energy:status": {
           "title": "Status Summary",
@@ -224,7 +198,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "uniqueItems": true
         },
         "energy:measurement_type": {
           "title": "Measurement Type Summary",
@@ -232,7 +207,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "uniqueItems": true
         },
         "energy:generation_capacity": {
           "title": "Generation Capacity Summary",
@@ -246,7 +222,8 @@
             "maximum": {
               "type": "number"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "energy:storage_power": {
           "title": "Storage Power Summary",
@@ -260,7 +237,8 @@
             "maximum": {
               "type": "number"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "energy:storage_capacity": {
           "title": "Storage Capacity Summary",
@@ -274,12 +252,17 @@
             "maximum": {
               "type": "number"
             }
-          }
+          },
+          "additionalProperties": false
         }
-      }
+      },
+      "patternProperties": {
+        "^(?!energy:)": {}
+      },
+      "additionalProperties": false
     },
     "fields": {
-      "$comment": "Add your new fields here. Don't require them here, do that above in the corresponding schema.",
+      "$comment": "All extension fields are listed here. They are not required (that is done above in the corresponding schema).",
       "type": "object",
       "properties": {
         "energy:entity_name": {
