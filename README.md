@@ -13,17 +13,20 @@ generation and storage data.
 
 - Examples:
   - Items:
-    - [Wind turbine](examples/item-unit-wind.json) (`entity_type=unit`, `fuel_type=wind`):
-      
+    - [Wind turbine](examples/item-unit-wind.json) (`entity_type=unit`, `fuel_type=wind`): 
       Shows a single-fuel unit-level entity with group and facility references.
-    - [Battery block](examples/item-group-storage.json) (`entity_type=group`, `fuel_type=storage`): 
-
+    - [Battery block](examples/item-group-storage.json) (`entity_type=group`, 
+      `fuel_type=storage`): 
       Shows a storage block entity with associated power and capacity.
-    - [Hybrid facility](examples/item-facility-hybrid.json) (`entity_type=facility`, `fuel_type=hybrid`): 
-
+    - [Hybrid facility](examples/item-facility-hybrid.json) (`entity_type=facility`, 
+      `fuel_type=hybrid`): 
       Shows a hybrid generation facility entity with two fuel types and ratios.
   - Collections:
-    - [Collection](examples/collection.json): Shows the usage of the extension in a STAC Collection
+    - [Wind park](examples/collection.json): Shows a homogeneous 
+      Collection using top-level energy fields to describe all Items from an example wind 
+      farm.
+    - [Country](examples/collection-country.json): Shows a heterogeneous 
+      Collection of all Items in a country using numerous summary fields.
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 
