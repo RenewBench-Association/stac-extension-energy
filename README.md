@@ -1,7 +1,7 @@
 # Energy Extension Specification
 
 - **Title:** Energy
-- **Identifier:** <https://stac-extensions.github.io/energy/v1.0.0/schema.json>
+- **Identifier:** <https://stac-extensions.github.io/energy/v0.1.0/schema.json>
 - **Field Name Prefix:** energy
 - **Scope:** Item, Collection
 - **Extension [Maturity Classification](https://github.com/radiantearth/stac-spec/tree/master/extensions/README.md#extension-maturity):** Proposal
@@ -22,7 +22,7 @@ generation and storage data.
       `fuel_type=hybrid`): 
       Shows a hybrid generation facility entity with two fuel types and ratios.
   - Collections:
-    - [Wind park](examples/collection.json): Shows a homogeneous 
+    - [Wind park](examples/collection-windpark.json): Shows a homogeneous 
       Collection using top-level energy fields to describe all Items from an example wind 
       farm.
     - [Country](examples/collection-country.json): Shows a heterogeneous 
@@ -44,17 +44,17 @@ The fields in the table below can be used in these parts of STAC documents:
 |------------------------------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `energy:entity_name`         | string    | **REQUIRED**. Name of the energy entity.                                                                                                            |
 | `energy:entity_type`         | string    | **REQUIRED**. The structural level the item represents (s. [entity_type](#energyentity_type)).                                                      |
-| `energy:group_name`          | string    | Name of the sub-facility group.<br> _Only permitted if `entity_type` is `unit`._                                                                    |
-| `energy:facility_name`       | string    | Name of the overarching facility.<br> _Only permitted if `entity_type` is `unit` or `group`._                                                       |
+| `energy:group_name`          | string    | Name of the sub-facility group.<br> *Only permitted if `entity_type` is `unit`.*                                                                    |
+| `energy:facility_name`       | string    | Name of the overarching facility.<br> *Only permitted if `entity_type` is `unit` or `group`.*                                                       |
 | `energy:operator`            | string    | Name of the company that operates the entity.                                                                                                       |
 | `energy:entity_osm_id`       | string    | The [OpenStreetMap (OSM)](https://www.openstreetmap.org) ID associated with the entity (s. [entity_osm_id](#energyentity_osm_id)).                  |
-| `energy:group_osm_id`        | string    | The OSM ID of the sub-facility group.<br> _Only permitted if `entity_type` is `unit`._                                                              |
-| `energy:facility_osm_id`     | string    | The OSM ID of the overarching facility.<br> _Only permitted if `entity_type` is `unit` or `group`._                                                 |
+| `energy:group_osm_id`        | string    | The OSM ID of the sub-facility group.<br> *Only permitted if `entity_type` is `unit`.*                                                              |
+| `energy:facility_osm_id`     | string    | The OSM ID of the overarching facility.<br> *Only permitted if `entity_type` is `unit` or `group`.*                                                 |
 | `energy:entity_ids`          | object    | Dictionary of IDs mapping ID types to values (s. [entity_ids](#energyentity_ids)).                                                                  |
 | `energy:fuel_type`           | string    | **REQUIRED**. The primary fuel used to generate energy (s. [fuel_type](#energyfuel_type)).                                                          |
 | `energy:fuel_subtype`        | string    | The subtype of fuel used (s. [fuel_subtype](#energyfuel_subtype)).                                                                                  |
 | `energy:hybrid_fuel_types`   | \[string] | **REQUIRED if `fuel_type` is `hybrid`**. The multiple types used to generate energy.                                                                |
-| `energy:hybrid_fuel_ratios`  | \[number] | Fraction / percentage of each fuel used in a hybrid system.<br> _Only permitted if `fuel_type` is `hybrid`; length must match `hybrid_fuel_types`._ |
+| `energy:hybrid_fuel_ratios`  | \[number] | Fraction / percentage of each fuel used in a hybrid system.<br> *Only permitted if `fuel_type` is `hybrid`; length must match `hybrid_fuel_types`.* |
 | `energy:generation_capacity` | number    | Installed capacity of the purely generating assets. Unit: MW.                                                                                       |
 | `energy:storage_power`       | number    | Maximum charge/discharge power of the storage system. Unit: MW.                                                                                     |
 | `energy:storage_capacity`    | number    | Total volume of energy the storage system can hold. Unit: MWh.                                                                                      |
@@ -99,7 +99,7 @@ corresponding entity is represented in OSM. For reference, some examples include
 > [!TIP]
 >
 > Depending on what the `entity_type` itself is, `energy:group_osm_id`, and 
-> `energy:facility:osm_id` can similarly be populated with OSM IDs. These must follow the 
+> `energy:facility_osm_id` can similarly be populated with OSM IDs. These must follow the 
 > same convention.
 
 #### energy:entity_ids
@@ -113,7 +113,6 @@ entity ID can be stored under a descriptive `key`. Examples for such keys includ
 | `gppd` | string | [Global Power Plant Database](https://resourcewatch.org/data/explore/Powerwatch) ID.       |
 | `eic`  | string | [Energy Identification Code](https://www.entsoe.eu/data/energy-identification-codes-eic/). |
 | `...`  | string | Any other existing ID system key.                                                          |
-
 
 #### energy:fuel_type
 
@@ -138,7 +137,7 @@ suitable definitions include:
 > `energy:hybrid_fuel_ratios`. Both field lists must 
 > have the same length. An example would be:
 >
-> - `energy:hybrid_fuel_types`: `[gas, geothermal]`
+> - `energy:hybrid_fuel_types`: `["gas", "geothermal"]`
 > - `energy:hybrid_fuel_ratios`: `[0.3, 0.7]`
 
 #### energy:fuel_subtype
