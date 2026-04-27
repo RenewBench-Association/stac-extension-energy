@@ -333,9 +333,9 @@
           "minItems": 2,
           "uniqueItems": true
         },
-        "energy:hybrid_fuel_ratio": {
+        "energy:hybrid_fuel_ratios": {
           "title": "Hybrid Fuel Ratio",
-          "description": "Ratio or percentage of each fuel used in a hybrid system.",
+          "description": "Fraction or percentage of each fuel used in a hybrid system.",
           "type": "array",
           "items": {
             "type": "number"
@@ -384,7 +384,7 @@
           }
         },
         {
-          "$comment": "energy:hybrid_fuel_types and energy:hybrid_fuel_ratio are only permitted when energy:fuel_type is 'hybrid'.",
+          "$comment": "energy:hybrid_fuel_types and energy:hybrid_fuel_ratios are only permitted when energy:fuel_type is 'hybrid'.",
           "if": {
             "required": ["energy:fuel_type"],
             "properties": {
@@ -397,7 +397,7 @@
             "not": {
               "anyOf": [
                 { "required": ["energy:hybrid_fuel_types"] },
-                { "required": ["energy:hybrid_fuel_ratio"] }
+                { "required": ["energy:hybrid_fuel_ratios"] }
               ]
             }
           }
