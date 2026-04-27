@@ -15,7 +15,7 @@
         [
           5.6,
           47.2,
-          15.0,
+          15,
           55.1
         ]
       ]
@@ -30,21 +30,39 @@
     }
   },
   "summaries": {
-    "energy:entity_type": ["unit", "group", "facility"],
-    "energy:fuel_type": ["gas", "coal", "solar", "wind", "storage", "hybrid"],
-    "energy:status": ["active", "decommissioned"],
-    "energy:measurement_type": ["net_output", "gross_output", "curtailed_output"],
+    "energy:entity_type": [
+      "unit",
+      "group",
+      "facility"
+    ],
+    "energy:fuel_type": [
+      "gas",
+      "coal",
+      "solar",
+      "wind",
+      "storage",
+      "hybrid"
+    ],
+    "energy:status": [
+      "active",
+      "decommissioned"
+    ],
+    "energy:measurement_type": [
+      "net_output",
+      "gross_output",
+      "curtailed_output"
+    ],
     "energy:generation_capacity": {
-      "minimum": 6.0,
-      "maximum": 200.0
+      "minimum": 6,
+      "maximum": 200
     },
     "energy:storage_power": {
-      "minimum": 15.0,
-      "maximum": 15.0
+      "minimum": 15,
+      "maximum": 15
     },
     "energy:storage_capacity": {
-      "minimum": 30.0,
-      "maximum": 30.0
+      "minimum": 30,
+      "maximum": 30
     }
   },
   "assets": {
@@ -52,14 +70,18 @@
       "href": "https://example.com/examples/example-country-overview.csv",
       "type": "text/csv",
       "title": "Collection overview",
-      "roles": ["overview"]
+      "roles": [
+        "overview"
+      ]
     }
   },
   "item_assets": {
     "data": {
       "type": "text/csv",
       "title": "Generation/Storage time series",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     }
   },
   "links": [

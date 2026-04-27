@@ -14,7 +14,7 @@
       "bbox": [
         [
           8.3,
-          53.0,
+          53,
           8.8,
           53.5
         ]
@@ -35,10 +35,13 @@
   "energy:operator": "Example Wind GmbH",
   "energy:measurement_type": "curtailed_output",
   "summaries": {
-    "energy:status": ["active", "under_construction"],
+    "energy:status": [
+      "active",
+      "under_construction"
+    ],
     "energy:generation_capacity": {
-      "minimum": 3.0,
-      "maximum": 8.0
+      "minimum": 3,
+      "maximum": 8
     }
   },
   "assets": {
@@ -46,14 +49,18 @@
       "href": "https://example.com/examples/example-wind-park-overview.csv",
       "type": "text/csv",
       "title": "Collection overview",
-      "roles": ["overview"]
+      "roles": [
+        "overview"
+      ]
     }
   },
   "item_assets": {
     "data": {
       "type": "text/csv",
       "title": "Generation time series",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     }
   },
   "links": [

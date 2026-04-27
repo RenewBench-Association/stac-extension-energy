@@ -30,8 +30,8 @@
       "example_battery_gmbh_id": "CUSTOM_BATTERY_001_ID"
     },
     "energy:fuel_type": "storage",
-    "energy:storage_power": 15.0,
-    "energy:storage_capacity": 30.0,
+    "energy:storage_power": 15,
+    "energy:storage_capacity": 30,
     "energy:measurement_type": "net_output"
   },
   "links": [
@@ -45,7 +45,9 @@
       "href": "https://example.com/examples/battery-block-001.csv",
       "type": "text/csv",
       "title": "Storage time series",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     }
   }
 }

@@ -35,7 +35,7 @@
     },
     "energy:fuel_type": "wind",
     "energy:fuel_subtype": "offshore",
-    "energy:generation_capacity": 6.0,
+    "energy:generation_capacity": 6,
     "energy:status": "active",
     "energy:measurement_type": "curtailed_output"
   },
@@ -50,7 +50,9 @@
       "href": "https://example.com/examples/turbine-001.csv",
       "type": "text/csv",
       "title": "Generation time series",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     }
   }
 }

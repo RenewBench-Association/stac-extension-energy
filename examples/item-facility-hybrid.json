@@ -24,9 +24,15 @@
     "energy:entity_type": "facility",
     "energy:operator": "Example Hybrid GmbH",
     "energy:fuel_type": "hybrid",
-    "energy:hybrid_fuel_types": ["gas", "solar"],
-    "energy:hybrid_fuel_ratios": [70, 30],
-    "energy:generation_capacity": 200.0,
+    "energy:hybrid_fuel_types": [
+      "gas",
+      "solar"
+    ],
+    "energy:hybrid_fuel_ratios": [
+      70,
+      30
+    ],
+    "energy:generation_capacity": 200,
     "energy:status": "decommissioned",
     "energy:measurement_type": "gross_output"
   },
@@ -41,7 +47,9 @@
       "href": "https://example.com/examples/hybrid-facility-001.csv",
       "type": "text/csv",
       "title": "Generation time series",
-      "roles": ["data"]
+      "roles": [
+        "data"
+      ]
     }
   }
 }
