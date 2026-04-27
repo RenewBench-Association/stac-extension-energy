@@ -93,8 +93,8 @@ suitable definitions include:
 | `nuclear`                        | Nuclear fission energy.                                                  |
 | `geothermal`, `biomass`, `hydro` | Renewable thermal and water sources.                                     |
 | `wind`, `solar`                  | Renewable wind and photovoltaic / solar sources.                         |
-| `storage`                        | Stand-alone storage systems (e.g., batteries).                           |
 | `wasteheat`                      | Energy recovered from thermal waste.                                     |
+| `storage`                        | Stand-alone storage systems (e.g., batteries).                           |
 | `hybrid`                         | Systems using multiple fuel types (requires `energy:hybrid_fuel_types`). |
 
 > [!IMPORTANT]
@@ -136,15 +136,15 @@ suitable definitions include:
 The `energy:measurement_type` field categorizes the numerical data being reported. Examples for
 suitable definitions include:
 
-| Value                   | Description                                       |
-|-------------------------|---------------------------------------------------|
-| `gross_generation`      | Total production before internal plant loads.     |
-| `net_generation`        | Actual energy injected into the grid.             |
-| `simulated_generation`  | Data derived from physical or statistical models. |
-| `estimated_generation`  | Data approximated via proxy variables.            |
-| `forecast_generation`   | Predicted future energy production.               |
-| `calculated_generation` | Derived via mathematical formulas.                |
-| `curtailed_generation`  | Potential energy lost due to grid constraints.    |
+| Value               | Description                                       |
+|---------------------|---------------------------------------------------|
+| `gross_output`      | Total production before internal plant loads.     |
+| `net_output`        | Actual energy injected into the grid.             |
+| `simulated_output`  | Data derived from physical or statistical models. |
+| `estimated_output`  | Data approximated via proxy variables.            |
+| `forecast_output`   | Predicted future energy production.               |
+| `calculated_output` | Derived via mathematical formulas.                |
+| `curtailed_output`  | Potential energy lost due to grid constraints.    |
 
 ---
 
