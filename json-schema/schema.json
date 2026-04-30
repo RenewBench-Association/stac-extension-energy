@@ -1,11 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://stac-extensions.github.io/template/v1.0.0/schema.json#",
-  "title": "Template Extension",
-  "description": "STAC Template Extension for STAC Items and STAC Collections.",
+  "$id": "https://stac-extensions.github.io/energy/v0.1.0/schema.json#",
+  "title": "Energy Extension",
+  "description": "STAC Energy Extension for STAC Items and STAC Collections.",
   "oneOf": [
     {
-      "$comment": "This is the schema for STAC Items. Remove this object if this extension only applies to Collections.",
+      "$comment": "This is the schema for STAC Items.",
       "allOf": [
         {
           "$ref": "#/definitions/stac_extensions"
@@ -24,22 +24,18 @@
             "properties": {
               "allOf": [
                 {
-                  "$comment": "Require fields here for Item Properties.",
+                  "$comment": "Required fields for Item Properties.",
                   "required": [
-                    "template:new_field"
+                    "energy:entity_name",
+                    "energy:entity_type",
+                    "energy:fuel_type",
+                    "energy:measurement_type"
                   ]
                 },
                 {
                   "$ref": "#/definitions/fields"
                 }
               ]
-            },
-            "assets": {
-              "$comment": "This validates the fields in Item Assets, but does not require them.",
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/fields"
-              }
             }
           }
         }
@@ -65,77 +61,34 @@
       ],
       "anyOf": [
         {
-          "$comment": "This is the schema for the top-level fields in a Collection. Remove this if this extension does not define top-level fields for Collections.",
+          "$comment": "This is the schema for top-level Collection fields. If given, requires at least one energy field.",
           "allOf": [
             {
-              "$comment": "Require fields here for Collections (top-level).",
-              "required": [
-                "template:new_field"
-              ]
+              "$comment": "Require fields here for Collections at top level.",
+              "$ref": "#/definitions/require_any_top_level_field"
             },
             {
-              "$ref": "#/definitions/fields"
+              "$ref": "#/definitions/top_level_fields"
             }
           ]
         },
         {
-          "$comment": "This validates the fields in Collection Assets, but does not require them.",
-          "required": [
-            "assets"
-          ],
-          "properties": {
-            "assets": {
-              "type": "object",
-              "not": {
-                "additionalProperties": {
-                  "not": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/require_any_field"
-                      },
-                      {
-                        "$ref": "#/definitions/fields"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "$comment": "This is the schema for the fields in Item Asset Definitions. It doesn't require any fields.",
-          "required": [
-            "item_assets"
-          ],
-          "properties": {
-            "item_assets": {
-              "type": "object",
-              "not": {
-                "additionalProperties": {
-                  "not": {
-                    "allOf": [
-                      {
-                        "$ref": "#/definitions/require_any_field"
-                      },
-                      {
-                        "$ref": "#/definitions/fields"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "$comment": "This is the schema for the fields in Summaries. By default, only checks the existence of the properties, but not the schema of the summaries.",
+          "$comment": "This is the schema for the fields in Collection Summaries. If given, requires at least one energy summary field.",
           "required": [
             "summaries"
           ],
           "properties": {
             "summaries": {
-              "$ref": "#/definitions/require_any_field"
+              "type": "object",
+              "allOf": [
+                {
+                  "$comment": "Require fields here for Collection summaries.",
+                  "$ref": "#/definitions/require_any_summary_field"
+                },
+                {
+                  "$ref": "#/definitions/summary_fields"
+                }
+              ]
             }
           }
         }
@@ -152,56 +105,351 @@
         "stac_extensions": {
           "type": "array",
           "contains": {
-            "const": "https://stac-extensions.github.io/template/v1.0.0/schema.json"
+            "const": "https://stac-extensions.github.io/energy/v0.1.0/schema.json"
           }
         }
       }
     },
-    "require_any_field": {
-      "$comment": "Please list all fields here so that we can force the existence of one of them in other parts of the schemas.",
+    "require_any_top_level_field": {
+      "$comment": "Requires at least one meaningful field to be present in Collection top level.",
       "anyOf": [
-        {"required": ["template:new_field"]},
-        {"required": ["template:xyz"]},
-        {"required": ["template:another_one"]}
+        {"required": ["energy:entity_type"]},
+        {"required": ["energy:fuel_type"]},
+        {"required": ["energy:fuel_subtype"]},
+        {"required": ["energy:status"]},
+        {"required": ["energy:operator"]},
+        {"required": ["energy:measurement_type"]}
       ]
     },
-    "fields": {
-      "$comment": "Add your new fields here. Don't require them here, do that above in the corresponding schema.",
+    "top_level_fields": {
+      "$comment": "Defines the allowed top-level fields for Collections.",
       "type": "object",
       "properties": {
-        "template:new_field": {
+        "energy:entity_type": {
           "type": "string"
         },
-        "template:xyz": {
-          "type": "object",
-          "required": [
-            "x",
-            "y",
-            "z"
-          ],
-          "properties": {
-            "x": {
-              "type": "number"
-            },
-            "y": {
-              "type": "number"
-            },
-            "z": {
-              "type": "number"
-            }
-          }
+        "energy:fuel_type": {
+          "type": "string"
         },
-        "template:another_one": {
-          "type": "array",
-          "items": {
-            "type": "number"
-          }
+        "energy:fuel_subtype": {
+          "type": "string"
+        },
+        "energy:status": {
+          "type": "string"
+        },
+        "energy:operator": {
+          "type": "string"
+        },
+        "energy:measurement_type": {
+          "type": "string"
         }
       },
       "patternProperties": {
-        "^(?!template:)": {
-          "$comment": "Above, change `template` to the prefix of this extension"
+        "^(?!energy:)": {}
+      },
+      "additionalProperties": false
+    },
+    "require_any_summary_field": {
+      "$comment": "Requires at least one meaningful summary field to be present in Collection summaries.",
+      "anyOf": [
+        {"required": ["energy:entity_type"]},
+        {"required": ["energy:fuel_type"]},
+        {"required": ["energy:fuel_subtype"]},
+        {"required": ["energy:status"]},
+        {"required": ["energy:measurement_type"]},
+        {"required": ["energy:generation_capacity"]},
+        {"required": ["energy:storage_power"]},
+        {"required": ["energy:storage_capacity"]}
+      ]
+    },
+    "summary_fields": {
+      "$comment": "Defines the allowed summary fields for Collections. Categorical fields are arrays of strings; numerical fields are range objects.",
+      "type": "object",
+      "properties": {
+        "energy:entity_type": {
+          "title": "Entity Type Summary",
+          "description": "Set of entity type values present in the Collection.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "energy:fuel_type": {
+          "title": "Fuel Type Summary",
+          "description": "Set of fuel type values present in the Collection.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "energy:fuel_subtype": {
+          "title": "Fuel Subtype Summary",
+          "description": "Set of fuel subtype values present in the Collection.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "energy:status": {
+          "title": "Status Summary",
+          "description": "Set of operational status values present in the Collection.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "energy:measurement_type": {
+          "title": "Measurement Type Summary",
+          "description": "Set of measurement type values present in the Collection.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "energy:generation_capacity": {
+          "title": "Generation Capacity Summary",
+          "description": "Range of installed generation capacity values (MW) across the Collection.",
+          "type": "object",
+          "required": ["minimum", "maximum"],
+          "properties": {
+            "minimum": {
+              "type": "number"
+            },
+            "maximum": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "energy:storage_power": {
+          "title": "Storage Power Summary",
+          "description": "Range of maximum storage charge/discharge power values (MW) across the Collection.",
+          "type": "object",
+          "required": ["minimum", "maximum"],
+          "properties": {
+            "minimum": {
+              "type": "number"
+            },
+            "maximum": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
+        },
+        "energy:storage_capacity": {
+          "title": "Storage Capacity Summary",
+          "description": "Range of total storage capacity values (MWh) across the Collection.",
+          "type": "object",
+          "required": ["minimum", "maximum"],
+          "properties": {
+            "minimum": {
+              "type": "number"
+            },
+            "maximum": {
+              "type": "number"
+            }
+          },
+          "additionalProperties": false
         }
+      },
+      "patternProperties": {
+        "^(?!energy:)": {}
+      },
+      "additionalProperties": false
+    },
+    "fields": {
+      "$comment": "All extension fields are listed here. They are not required (that is done above in the corresponding schema).",
+      "type": "object",
+      "properties": {
+        "energy:entity_name": {
+          "title": "Entity Name",
+          "description": "Name of the energy entity.",
+          "type": "string"
+        },
+        "energy:entity_type": {
+          "title": "Entity Type",
+          "description": "The structural level the item represents (e.g. unit, group, facility, portfolio, region, unknown).",
+          "type": "string"
+        },
+        "energy:group_name": {
+          "title": "Group Name",
+          "description": "Name of the sub-facility group. Only permitted if entity_type is 'unit'.",
+          "type": "string"
+        },
+        "energy:facility_name": {
+          "title": "Facility Name",
+          "description": "Name of the overarching facility. Only permitted if entity_type is 'unit' or 'group'.",
+          "type": "string"
+        },
+        "energy:operator": {
+          "title": "Operator",
+          "description": "Name of the company that operates the entity.",
+          "type": "string"
+        },
+        "energy:entity_osm_id": {
+          "title": "Entity OSM ID",
+          "description": "The OpenStreetMap (OSM) ID associated with the entity.",
+          "type": "string",
+          "pattern": "^(node|way|relation)/[0-9]+$"
+        },
+        "energy:group_osm_id": {
+          "title": "Group OSM ID",
+          "description": "The OSM ID of the sub-facility group. Only permitted if entity_type is 'unit'.",
+          "type": "string",
+          "pattern": "^(node|way|relation)/[0-9]+$"
+        },
+        "energy:facility_osm_id": {
+          "title": "Facility OSM ID",
+          "description": "The OSM ID of the overarching facility. Only permitted if entity_type is 'unit' or 'group'.",
+          "type": "string",
+          "pattern": "^(node|way|relation)/[0-9]+$"
+        },
+        "energy:entity_ids": {
+          "title": "Entity IDs",
+          "description": "Dictionary of IDs mapping ID types to values.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "energy:fuel_type": {
+          "title": "Fuel Type",
+          "description": "The primary fuel used to generate energy (e.g. gas, coal, oil, nuclear, wind, solar, hydro, storage, hybrid).",
+          "type": "string"
+        },
+        "energy:fuel_subtype": {
+          "title": "Fuel Subtype",
+          "description": "The subtype of fuel used (e.g. lng, offshore, pv).",
+          "type": "string"
+        },
+        "energy:hybrid_fuel_types": {
+          "title": "Hybrid Fuel Types",
+          "description": "The multiple fuel types used to generate energy. Required if fuel_type is 'hybrid'.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 2,
+          "uniqueItems": true
+        },
+        "energy:hybrid_fuel_fractions": {
+          "$comment": "energy:hybrid_fuel_fractions should have the same length as energy:hybrid_fuel_types!",
+          "title": "Hybrid Fuel Fractions",
+          "description": "Fraction of each fuel used in a hybrid system.",
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 2
+        },
+        "energy:generation_capacity": {
+          "title": "Generation Capacity",
+          "description": "Installed capacity of the purely generating assets. Unit: MW.",
+          "type": "number"
+        },
+        "energy:storage_power": {
+          "title": "Storage Power",
+          "description": "Maximum charge/discharge power of the storage system. Unit: MW.",
+          "type": "number"
+        },
+        "energy:storage_capacity": {
+          "title": "Storage Capacity",
+          "description": "Total volume of energy the storage system can hold. Unit: MWh.",
+          "type": "number"
+        },
+        "energy:status": {
+          "title": "Status",
+          "description": "Operational status of the entity (e.g. active, inactive, under_construction, decommissioned).",
+          "type": "string"
+        },
+        "energy:measurement_type": {
+          "title": "Measurement Type",
+          "description": "Describes the kind of data recorded (e.g. gross_generation, net_generation, simulated_generation).",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$comment": "energy:hybrid_fuel_types is required when energy:fuel_type is 'hybrid'.",
+          "if": {
+            "required": ["energy:fuel_type"],
+            "properties": {
+              "energy:fuel_type": {
+                "const": "hybrid"
+              }
+            }
+          },
+          "then": {
+            "required": ["energy:hybrid_fuel_types"]
+          }
+        },
+        {
+          "$comment": "energy:hybrid_fuel_types and energy:hybrid_fuel_fractions are only permitted when energy:fuel_type is 'hybrid'.",
+          "if": {
+            "required": ["energy:fuel_type"],
+            "properties": {
+              "energy:fuel_type": {
+                "const": "hybrid"
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                { "required": ["energy:hybrid_fuel_types"] },
+                { "required": ["energy:hybrid_fuel_fractions"] }
+              ]
+            }
+          }
+        },
+        {
+          "$comment": "energy:group_name and energy:group_osm_id are only permitted when energy:entity_type is 'unit'.",
+          "if": {
+            "required": ["energy:entity_type"],
+            "properties": {
+              "energy:entity_type": {
+                "const": "unit"
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                { "required": ["energy:group_name"] },
+                { "required": ["energy:group_osm_id"] }
+              ]
+            }
+          }
+        },
+        {
+          "$comment": "energy:facility_name and energy:facility_osm_id are only permitted when energy:entity_type is 'unit' or 'group'.",
+          "if": {
+            "required": ["energy:entity_type"],
+            "properties": {
+              "energy:entity_type": {
+                "enum": ["unit", "group"]
+              }
+            }
+          },
+          "else": {
+            "not": {
+              "anyOf": [
+                { "required": ["energy:facility_name"] },
+                { "required": ["energy:facility_osm_id"] }
+              ]
+            }
+          }
+        }
+      ],
+      "patternProperties": {
+        "^(?!energy:)": {}
       },
       "additionalProperties": false
     }
