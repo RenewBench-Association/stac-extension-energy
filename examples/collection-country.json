@@ -1,7 +1,6 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
     "https://stac-extensions.github.io/energy/v0.1.0/schema.json"
   ],
   "type": "Collection",
@@ -63,25 +62,6 @@
     "energy:storage_capacity": {
       "minimum": 30,
       "maximum": 30
-    }
-  },
-  "assets": {
-    "overview": {
-      "href": "https://example.com/examples/example-country-overview.csv",
-      "type": "text/csv",
-      "title": "Collection overview",
-      "roles": [
-        "overview"
-      ]
-    }
-  },
-  "item_assets": {
-    "data": {
-      "type": "text/csv",
-      "title": "Generation/Storage time series",
-      "roles": [
-        "data"
-      ]
     }
   },
   "links": [

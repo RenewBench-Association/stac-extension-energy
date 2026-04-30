@@ -22,11 +22,13 @@ generation and storage data.
       `fuel_type=hybrid`): 
       Shows a hybrid generation facility entity with two fuel types and ratios.
   - Collections:
-    - [Wind park](examples/collection-windpark.json): Shows a homogeneous 
-      Collection using top-level energy fields to describe all Items from an example wind 
-      farm.
-    - [Country](examples/collection-country.json): Shows a heterogeneous 
-      Collection of all Items in a country using numerous summary fields.
+    - [Wind park](examples/collection-windpark.json): Shows an example of a **highly homogeneous** Collection where all 
+      Items belong to one wind park. Shared metadata (such as operator and fuel) are defined
+      as top-level `energy` fields and only operational characteristics (like statuses or 
+      entity types) are summarized.
+    - [Country](examples/collection-country.json): Shows an example of a **heterogeneous** Collection of all Items within
+      one geographic region. Due to the data diversity, extensive summary fields are 
+      used in lieu of top-level fields.
 - [JSON Schema](json-schema/schema.json)
 - [Changelog](./CHANGELOG.md)
 

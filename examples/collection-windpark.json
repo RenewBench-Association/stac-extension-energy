@@ -1,7 +1,6 @@
 {
   "stac_version": "1.0.0",
   "stac_extensions": [
-    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
     "https://stac-extensions.github.io/energy/v0.1.0/schema.json"
   ],
   "type": "Collection",
@@ -29,12 +28,14 @@
       ]
     }
   },
-  "energy:entity_type": "unit",
   "energy:fuel_type": "wind",
   "energy:fuel_subtype": "offshore",
   "energy:operator": "Example Wind GmbH",
   "energy:measurement_type": "curtailed_output",
   "summaries": {
+    "energy:entity_type": [
+      "unit"
+    ],
     "energy:status": [
       "active",
       "under_construction"
@@ -42,25 +43,6 @@
     "energy:generation_capacity": {
       "minimum": 3,
       "maximum": 8
-    }
-  },
-  "assets": {
-    "overview": {
-      "href": "https://example.com/examples/example-wind-park-overview.csv",
-      "type": "text/csv",
-      "title": "Collection overview",
-      "roles": [
-        "overview"
-      ]
-    }
-  },
-  "item_assets": {
-    "data": {
-      "type": "text/csv",
-      "title": "Generation time series",
-      "roles": [
-        "data"
-      ]
     }
   },
   "links": [
