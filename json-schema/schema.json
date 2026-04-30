@@ -14,7 +14,8 @@
           "type": "object",
           "required": [
             "type",
-            "properties"
+            "properties",
+            "assets"
           ],
           "properties": {
             "type": {
@@ -336,12 +337,15 @@
           "minItems": 2,
           "uniqueItems": true
         },
-        "energy:hybrid_fuel_ratios": {
-          "title": "Hybrid Fuel Ratio",
-          "description": "Fraction or percentage of each fuel used in a hybrid system.",
+        "energy:hybrid_fuel_fractions": {
+          "$comment": "energy:hybrid_fuel_fractions should have the same length as energy:hybrid_fuel_types!",
+          "title": "Hybrid Fuel Fractions",
+          "description": "Fraction of each fuel used in a hybrid system.",
           "type": "array",
           "items": {
-            "type": "number"
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
           },
           "minItems": 2
         },
@@ -387,7 +391,7 @@
           }
         },
         {
-          "$comment": "energy:hybrid_fuel_types and energy:hybrid_fuel_ratios are only permitted when energy:fuel_type is 'hybrid'.",
+          "$comment": "energy:hybrid_fuel_types and energy:hybrid_fuel_fractions are only permitted when energy:fuel_type is 'hybrid'.",
           "if": {
             "required": ["energy:fuel_type"],
             "properties": {
@@ -400,7 +404,7 @@
             "not": {
               "anyOf": [
                 { "required": ["energy:hybrid_fuel_types"] },
-                { "required": ["energy:hybrid_fuel_ratios"] }
+                { "required": ["energy:hybrid_fuel_fractions"] }
               ]
             }
           }
@@ -445,9 +449,7 @@
         }
       ],
       "patternProperties": {
-        "^(?!energy:)": {
-          "$comment": "Above, change `energy` to the prefix of this extension"
-        }
+        "^(?!energy:)": {}
       },
       "additionalProperties": false
     }

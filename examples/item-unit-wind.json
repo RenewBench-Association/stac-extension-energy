@@ -19,7 +19,9 @@
     ]
   },
   "properties": {
-    "datetime": "2024-01-01T00:00:00Z",
+    "datetime": "2025-01-01T00:00:00Z",
+    "start_datetime": "2025-01-01T00:00:00Z",
+    "end_datetime": "2025-12-31T23:59:59Z",
     "energy:entity_name": "Turbine-001",
     "energy:entity_type": "unit",
     "energy:group_name": "Block-A",
@@ -29,7 +31,7 @@
     "energy:group_osm_id": "way/000000033",
     "energy:facility_osm_id": "way/000000333",
     "energy:entity_ids": {
-      "gppd": "WRI1234567",
+      "gppd": "WRI-EXAMPLE",
       "eic": "11XEXAMPLE-----E",
       "example_wind_gmbh_id": "CUSTOM_TURBINE_001_ID"
     },
