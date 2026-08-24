@@ -26,9 +26,8 @@
     "energy:entity_type": "group",
     "energy:facility_name": "Battery-Park-Example",
     "energy:operator": "Example Battery GmbH",
-    "energy:entity_osm_id": "way/000000022",
-    "energy:facility_osm_id": "relation/000000222",
     "energy:entity_ids": {
+      "osm": "way/000000022",
       "example_battery_gmbh_id": "CUSTOM_BATTERY_001_ID"
     },
     "energy:fuel_type": "storage",

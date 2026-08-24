@@ -49,9 +49,6 @@ The fields in the table below can be used in these parts of STAC documents:
 | `energy:group_name`            | string    | Name of the sub-facility group. *Only permitted if `entity_type` is `unit`.*                                                       |
 | `energy:facility_name`         | string    | Name of the overarching facility. *Only permitted if `entity_type` is `unit` or `group`.*                                          |
 | `energy:operator`              | string    | Name of the company that operates the entity.                                                                                      |
-| `energy:entity_osm_id`         | string    | The [OpenStreetMap (OSM)](https://www.openstreetmap.org) ID associated with the entity (s. [entity_osm_id](#energyentity_osm_id)). |
-| `energy:group_osm_id`          | string    | The OSM ID of the sub-facility group. *Only permitted if `entity_type` is `unit`.*                                                 |
-| `energy:facility_osm_id`       | string    | The OSM ID of the overarching facility. *Only permitted if `entity_type` is `unit` or `group`.*                                    |
 | `energy:entity_ids`            | object    | Dictionary of IDs mapping ID types to values (s. [entity_ids](#energyentity_ids)).                                                 |
 | `energy:fuel_type`             | string    | **REQUIRED**. The primary fuel used to generate energy (s. [fuel_type](#energyfuel_type)).                                         |
 | `energy:fuel_subtype`          | string    | The subtype of fuel used (s. [fuel_subtype](#energyfuel_subtype)).                                                                 |
@@ -86,24 +83,6 @@ Examples for suitable definitions include:
 > `energy:entity_type=unit` but the facility is also known, this can be provided in the 
 > additional `energy:facility_name` field.
 
-#### `energy:entity_osm_id`
-
-The `energy:entity_osm_id` field defines the ID that is associated with the energy 
-entity on OSM. Following OSM conventions, it should be formatted as `<type>/<id>` where 
-`<type>` is one of `node`, `way`, or `relation`. The specific type definition depends on how the 
-corresponding entity is represented in OSM. For reference, some examples include:
-
-- a wind turbine listed as [a node](https://www.openstreetmap.org/node/3347682357#map=14/53.45696/-3.30075),
-- wind farms defined as [a node](https://www.openstreetmap.org/node/310852906),
-  [a way](https://www.openstreetmap.org/way/327949356#map=12/53.4824/-3.2598), or
-  [a relation](https://www.openstreetmap.org/relation/6949277#map=12/55.4521/-3.5763).
-
-> **TIP**
->
-> Depending on what the `entity_type` itself is, `energy:group_osm_id`, and 
-> `energy:facility_osm_id` can similarly be populated with OSM IDs. These must follow the 
-> same convention.
-
 #### energy:entity_ids
 
 The `energy:entity_ids` object provides a flexible way to map multiple external 
@@ -114,7 +93,15 @@ entity ID can be stored under a descriptive `key`. Examples for such keys includ
 |--------|--------|--------------------------------------------------------------------------------------------|
 | `gppd` | string | [Global Power Plant Database](https://resourcewatch.org/data/explore/Powerwatch) ID.       |
 | `eic`  | string | [Energy Identification Code](https://www.entsoe.eu/data/energy-identification-codes-eic/). |
+| `osm`  | string | [OpenStreetMap](https://www.openstreetmap.org) ID, formatted as `<type>/<id>`.             |
 | `...`  | string | Any other existing ID system key.                                                          |
+
+> **TIP**
+>
+> Following OSM conventions, an `osm` ID is formatted as `<type>/<id>`, where `<type>` is 
+> one of `node`, `way`, or `relation`, depending on how the entity is represented in OSM. 
+> Examples include a turbine as [a node](https://www.openstreetmap.org/node/3347682357) or 
+> a wind farm as [a way](https://www.openstreetmap.org/way/327949356).
 
 #### energy:fuel_type
 

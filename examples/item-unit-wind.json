@@ -27,10 +27,8 @@
     "energy:group_name": "Block-A",
     "energy:facility_name": "Offshore-Wind-Park-Example",
     "energy:operator": "Example Wind GmbH",
-    "energy:entity_osm_id": "node/000000003",
-    "energy:group_osm_id": "way/000000033",
-    "energy:facility_osm_id": "way/000000333",
     "energy:entity_ids": {
+      "osm": "node/000000003",
       "gppd": "WRI-EXAMPLE",
       "eic": "11XEXAMPLE-----E",
       "example_wind_gmbh_id": "CUSTOM_TURBINE_001_ID"
