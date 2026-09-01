@@ -291,24 +291,6 @@
           "description": "Name of the company that operates the entity.",
           "type": "string"
         },
-        "energy:entity_osm_id": {
-          "title": "Entity OSM ID",
-          "description": "The OpenStreetMap (OSM) ID associated with the entity.",
-          "type": "string",
-          "pattern": "^(node|way|relation)/[0-9]+$"
-        },
-        "energy:group_osm_id": {
-          "title": "Group OSM ID",
-          "description": "The OSM ID of the sub-facility group. Only permitted if entity_type is 'unit'.",
-          "type": "string",
-          "pattern": "^(node|way|relation)/[0-9]+$"
-        },
-        "energy:facility_osm_id": {
-          "title": "Facility OSM ID",
-          "description": "The OSM ID of the overarching facility. Only permitted if entity_type is 'unit' or 'group'.",
-          "type": "string",
-          "pattern": "^(node|way|relation)/[0-9]+$"
-        },
         "energy:entity_ids": {
           "title": "Entity IDs",
           "description": "Dictionary of IDs mapping ID types to values.",
@@ -410,7 +392,7 @@
           }
         },
         {
-          "$comment": "energy:group_name and energy:group_osm_id are only permitted when energy:entity_type is 'unit'.",
+          "$comment": "energy:group_name is only permitted when energy:entity_type is 'unit'.",
           "if": {
             "required": ["energy:entity_type"],
             "properties": {
@@ -421,15 +403,12 @@
           },
           "else": {
             "not": {
-              "anyOf": [
-                { "required": ["energy:group_name"] },
-                { "required": ["energy:group_osm_id"] }
-              ]
+              "required": ["energy:group_name"]
             }
           }
         },
         {
-          "$comment": "energy:facility_name and energy:facility_osm_id are only permitted when energy:entity_type is 'unit' or 'group'.",
+          "$comment": "energy:facility_name is only permitted when energy:entity_type is 'unit' or 'group'.",
           "if": {
             "required": ["energy:entity_type"],
             "properties": {
@@ -440,10 +419,7 @@
           },
           "else": {
             "not": {
-              "anyOf": [
-                { "required": ["energy:facility_name"] },
-                { "required": ["energy:facility_osm_id"] }
-              ]
+              "required": ["energy:facility_name"]
             }
           }
         }

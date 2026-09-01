@@ -10,9 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- OSM IDs, where available, are now recorded under the `osm` key of `energy:entity_ids`.
+
 ### Deprecated
 
 ### Removed
+
+- `energy:entity_osm_id`, `energy:group_osm_id` and `energy:facility_osm_id`: OSM IDs are hard to
+  obtain and of limited value as dedicated fields.
 
 ### Fixed
 
